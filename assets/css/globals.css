@@ -16,7 +16,7 @@
   }
 }
 
-body {
+/* body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -24,4 +24,10 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+} */
+
+@layer components {
+  .roundBtn {
+    @apply rounded-full mx-[2px] h-6 w-6 bg-red-500 hover:bg-red-800  outline-none disabled:bg-red-400 cursor-pointer disabled:cursor-not-allowed border border-red-500;
+  }
 }
