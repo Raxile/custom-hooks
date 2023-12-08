@@ -1,7 +1,12 @@
 import HomeWrapper from "@/components/HomeWrapper";
+import { metaDataBase } from "@/constants/defaultValues";
 import { get } from "@/helper/axiosInstance";
 
-async function getData(limit = 20, page = 1, search) {
+async function getData(
+  limit = metaDataBase.limit,
+  page = metaDataBase.page,
+  search
+) {
   if (search) {
     if (limit && page) {
       const data = await get(

@@ -1,10 +1,15 @@
 "use client";
 
+import { metaDataBase } from "@/constants/defaultValues";
 import Card from "./Card";
 import ListHeading from "./ListHeading";
 import Pagination from "./Pagination";
 
-const HomeWrapper = ({ data, limit = 20, page = 1 }) => {
+const HomeWrapper = ({
+  data,
+  limit = metaDataBase.limit,
+  page = metaDataBase.page,
+}) => {
   return (
     <div>
       <ListHeading limit={limit} page={page} totalProduct={data.total} />
