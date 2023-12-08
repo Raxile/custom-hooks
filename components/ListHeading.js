@@ -12,14 +12,16 @@ const ListHeading = ({ limit, page, totalProduct = 0 }) => {
             className="px-2 h-6 rounded-full text-sm outline-none border border-red-200 hover:border-red-300 focus:border-red-300"
             placeholder="search"
             onChange={(e) => {
-              router.push({
-                pathName: "/",
-                query: {
-                  limit: limit,
-                  page: 1,
-                  search: e.target.value,
+              router.push(
+                {
+                  pathName: "/",
+                  query: {
+                    page: 1,
+                    search: e.target.value,
+                  },
                 },
-              });
+                { isReplace: false }
+              );
             }}
           />
         </div>
