@@ -3,20 +3,37 @@
 import { useRouter } from "next/navigation";
 
 /**
- * Custom hook for managing query parameters in Next.js.
- * @returns {object} An object with functions to manipulate the router.
+ * Custom hook for handling navigation with query parameters in Next.js.
+ * @returns {Object} An object containing functions for navigation operations.
  */
 function useQueryParam() {
-  // Accessing the Next.js router
   const router = useRouter();
 
   /**
-   * Function to check the type of parameters.
-   * @param {string} pathName - The path name for the URL.
-   * @param {object} query - The query parameters.
-   * @throws Will throw an error if the parameters are not valid.
-   * @returns {boolean} Returns true if parameters are valid.
+   * Updates the provided query object with values from the current URL's query string.
+   * If a key from the query object already exists in the URL's query string, it retains the original value.
+   * @param {Object} query - The query object to be updated.
    */
+
+  const returnOldQuery = (query) => {
+    const oldQuery = window.location.search.substring(1);
+    const keyValuePair = oldQuery.split("&");
+    keyValuePair.forEach((pair) => {
+      const [key, value] = pair.split("=");
+      if (!query[key]) {
+        query[key] = value;
+      }
+    });
+  };
+
+  /**
+   * Validates the type of pathName and query parameters.
+   * @param {string} pathName - The path name to navigate to.
+   * @param {Object} query - The query parameters.
+   * @throws Will throw an error if pathName is not a string or if query is not an object.
+   * @returns {boolean} Returns true if the parameters pass type validation.
+   */
+
   const typeCheckOfParams = (pathName, query) => {
     if (typeof pathName !== "string") {
       throw new Error("pathName is required to be string");
@@ -28,15 +45,19 @@ function useQueryParam() {
   };
 
   /**
-   * Function to construct the URL with query parameters.
-   * @param {string} pathName - The path name for the URL.
-   * @param {object} query - The query parameters.
-   * @returns {string} The constructed URL with query parameters.
+   * Constructs a URL with query parameters.
+   * @param {string} pathName - The path name to navigate to.
+   * @param {Object} query - The query parameters.
+   * @param {boolean} [isReplace=true] - If true, replaces the current URL; otherwise, appends to it.
+   * @returns {string} The constructed URL.
    */
-  const getUrl = (pathName, query) => {
+  const getUrl = (pathName, query, isReplace = true) => {
     const initialValue = "";
     if (!query) {
       return `${pathName}`;
+    }
+    if (!isReplace) {
+      returnOldQuery(query);
     }
     const arrOfKeys = Object.keys(query);
     const queryString = arrOfKeys.reduce((accumulator, currentValue) => {
@@ -65,15 +86,15 @@ function useQueryParam() {
   };
 
   /**
-   * Function to push a new route to the history stack.
-   * @param {object} params - An object containing pathName and query parameters.
-   * @param {object} obj - Additional options (e.g., scroll behavior).
+   * Navigates to a new URL with the specified path and query parameters.
+   * @param {Object} params - An object containing pathName and query parameters.
+   * @param {Object} [obj] - An optional object with additional configuration options.
    */
+
   const push = (params, obj) => {
     const { pathName, query } = params;
-
     if (typeCheckOfParams(pathName, query)) {
-      const url = getUrl(pathName, query);
+      const url = getUrl(pathName, query, obj?.isReplace);
       router.push(url, {
         scroll: obj?.scroll === undefined ? true : obj?.scroll,
       });
@@ -81,37 +102,38 @@ function useQueryParam() {
   };
 
   /**
-   * Function to replace the current route in the history stack.
-   * @param {object} params - An object containing pathName and query parameters.
-   * @param {object} obj - Additional options (e.g., scroll behavior).
+   * Replaces the current URL with the specified path and query parameters.
+   * @param {Object} params - An object containing pathName and query parameters.
+   * @param {Object} [obj] - An optional object with additional configuration options.
    */
   const replace = (params, obj) => {
     const { pathName, query } = params;
 
     if (typeCheckOfParams(pathName, query)) {
-      const url = getUrl(pathName, query);
+      const url = getUrl(pathName, query, obj?.isReplace);
       router.replace(url, {
         scroll: obj?.scroll === undefined ? true : obj?.scroll,
       });
     }
   };
   /**
-   * Function to navigate back in the history stack.
+   * Navigates back to the previous page in the browser's history.
    */
   const back = () => {
     router.back();
   };
   /**
-   * Function to navigate forward in the history stack.
+   * Navigates forward to the next page in the browser's history.
    */
-
   const forward = () => {
     router.forward();
   };
+
   /**
-   * Function to prefetch a page with the given parameters.
-   * @param {object} params - An object containing pathName and query parameters.
+   * Prefetches the specified URL with path and query parameters.
+   * @param {Object} params - An object containing pathName and query parameters.
    */
+
   const prefetch = (params) => {
     const { pathName, query } = params;
 
@@ -121,8 +143,6 @@ function useQueryParam() {
     }
   };
 
-  // Returning an object with the exposed functions
   return { push, replace, back, forward, prefetch };
 }
-// Exporting the custom hook
 export default useQueryParam;
