@@ -1,23 +1,24 @@
+import Image from "next/image";
 import React from "react";
 
 const Card = ({
-  title = "KFC",
-  description = "very very Tasty",
-  category = "Mobile",
-  discount = 0,
-  price = 5,
-  rating = "",
+  title = "",
+  category = "",
+  price = 0,
+  rating = 0,
   stock = 0,
-  thumbnail = "https://jscurious.com/wp-content/uploads/2021/01/javascript_fetch_api.jpg",
+  thumbnail = "",
 }) => {
   return (
     <>
       <div>
         <div className="h-[21rem] w-auto p-2 border border-red-200 bg-white hover:border-red-300">
           <div className="image w-full h-44">
-            <img
+            <Image
               src={thumbnail}
               alt={title}
+              width={600}
+              height={600}
               className="w-full h-full object-contain"
             />
           </div>

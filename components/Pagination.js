@@ -10,7 +10,7 @@ const Pagination = ({ limit, page, totalProduct = 0 }) => {
   for (let i = 1; i <= totalPages; i++) {
     pages.push(i);
   }
-  return (
+  return pages.length > 1 ? (
     <section className="mx-auto container">
       <div className="flex justify-center items-center my-6">
         <button
@@ -67,7 +67,7 @@ const Pagination = ({ limit, page, totalProduct = 0 }) => {
         </button>
       </div>
     </section>
-  );
+  ) : null;
 };
 
 export default Pagination;
