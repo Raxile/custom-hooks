@@ -10,7 +10,7 @@ export default function NotFound() {
         onClick={() => router.push({ pathName: "/" })}
         className="bg-red-300 mt-3 p-2 rounded-full border border-red-700 text-sm capitalize hover:bg-red-700 hover:text-white"
       >
-        Home
+        Back to Home
       </button>
     </div>
   );
