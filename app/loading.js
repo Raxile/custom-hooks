@@ -1,7 +1,12 @@
-import React from "react";
+import HomeWrapper from "@/components/HomeWrapper";
+import { getLoadingData } from "@/helper/utilityFunctions";
 
 const Loading = () => {
-  return <div>loading</div>;
+  return (
+    <main className="container mx-auto ">
+      <HomeWrapper isLoading data={getLoadingData()} />
+    </main>
+  );
 };
 
 export default Loading;

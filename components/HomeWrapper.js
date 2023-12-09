@@ -9,24 +9,32 @@ const HomeWrapper = ({
   data,
   limit = metaDataBase.limit,
   page = metaDataBase.page,
+  isLoading = false,
 }) => {
   return (
     <div>
-      <ListHeading limit={limit} page={page} totalProduct={data.total} />
+      <ListHeading limit={limit} page={page} totalProduct={data?.total} />
       <div className="restaurant grid grid-cols-4 gap-6 my-6  ">
         {data?.products.map((product) => (
           <Card
-            title={product.title}
-            key={product.id}
-            category={product.category}
-            thumbnail={product.thumbnail}
-            price={product.price}
-            rating={product.rating}
-            stock={product.stock}
+            title={product?.title}
+            key={product?.id}
+            category={product?.category}
+            thumbnail={product?.thumbnail}
+            price={product?.price}
+            rating={product?.rating}
+            stock={product?.stock}
+            isLoading={isLoading}
           />
         ))}
       </div>
-      <Pagination limit={limit} page={Number(page)} totalProduct={data.total} />
+      {!isLoading ? (
+        <Pagination
+          limit={limit}
+          page={Number(page)}
+          totalProduct={data?.total}
+        />
+      ) : null}
     </div>
   );
 };

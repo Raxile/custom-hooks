@@ -1,24 +1,8 @@
 import { limitDropdown } from "@/constants/defaultValues";
-import useDebounce from "@/hooks/useDebounce";
 import useQueryParam from "@/hooks/useQueryParam";
 
 const ListHeading = ({ limit, page, totalProduct = 0 }) => {
   const router = useQueryParam();
-  const callbackNavigate = (value) => {
-    router.push(
-      {
-        pathName: "/",
-        query: {
-          limit,
-          page: 1,
-          search: value,
-        },
-      },
-      { isReplace: false }
-    );
-  };
-  const [searchText, setSearchText] = useDebounce(callbackNavigate, 500);
-
   return (
     <section className="container mx-auto   my-4">
       <div className="flex justify-between items-center">
@@ -27,13 +11,11 @@ const ListHeading = ({ limit, page, totalProduct = 0 }) => {
             type="text"
             className="px-2 h-6 rounded-full text-sm outline-none border border-red-200 hover:border-red-300 focus:border-red-300"
             placeholder="search"
-            value={searchText}
-            onBlur={() => setSearchText("")}
             onChange={(e) => {
-              if (!e.target.value) {
-                router.push({ pathName: "/", query: { limit, page } });
-              }
-              setSearchText(e.target.value);
+              router.push({
+                pathName: "/",
+                query: { limit, page: 1, search: e.target.value },
+              });
             }}
           />
         </div>
