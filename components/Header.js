@@ -6,7 +6,7 @@ const Header = () => {
     <nav className="bg-red-600 text-white h-12 w-full flex items-center justify-center">
       <div className="container mx-auto  flex  justify-between">
         <div className="logo text-2xl font-serif font-bold italic cursor-pointer">
-          <Link href="/">Custom Params</Link>
+          <Link href="/">Custom Hooks</Link>
         </div>
         <ul className="flex gap-4 font-semibold items-center text-sm font-serif ">
           <li>

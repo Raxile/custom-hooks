@@ -31,3 +31,15 @@
     @apply rounded-full mx-[2px] h-6 w-6 bg-red-500 hover:bg-red-800  outline-none disabled:bg-red-400 cursor-pointer disabled:cursor-not-allowed border border-red-500;
   }
 }
+.skeleton {
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 80%);
+  }
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
+}
