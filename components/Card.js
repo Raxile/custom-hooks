@@ -5,9 +5,9 @@ import HiddenOnLoadingWrapper from "./HiddenOnLoadingWrapper";
 const Card = ({
   title = "",
   category = "",
-  price = "",
-  rating = "",
-  stock = "",
+  price = 0,
+  rating = 0,
+  stock = 0,
   thumbnail = "",
   isLoading,
 }) => {

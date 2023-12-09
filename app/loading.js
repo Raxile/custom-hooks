@@ -1,15 +1,10 @@
 import HomeWrapper from "@/components/HomeWrapper";
-import { getArray } from "@/helper/utilityFunctions";
+import { getLoadingData } from "@/helper/utilityFunctions";
 
 const Loading = () => {
-  const getData = () => {
-    return {
-      products: getArray(20),
-    };
-  };
   return (
     <main className="container mx-auto ">
-      <HomeWrapper isLoading data={getData()} />
+      <HomeWrapper isLoading data={getLoadingData()} />
     </main>
   );
 };
