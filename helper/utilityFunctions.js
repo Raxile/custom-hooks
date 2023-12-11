@@ -8,3 +8,7 @@ export const getLoadingData = () => {
     products: getArray(20),
   };
 };
+
+export const getCurrentYear = () => {
+  return new Date().getFullYear();
+};
