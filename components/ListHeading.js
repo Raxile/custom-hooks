@@ -1,5 +1,5 @@
-import { limitDropdown } from "@/constants/defaultValues";
-import useQueryParam from "@/hooks/useQueryParam";
+import { limitDropdown } from '@/constants/defaultValues';
+import useQueryParam from '@/hooks/useQueryParam';
 
 const ListHeading = ({ limit, page, totalProduct = 0 }) => {
   const router = useQueryParam();
@@ -13,7 +13,7 @@ const ListHeading = ({ limit, page, totalProduct = 0 }) => {
             placeholder="search"
             onChange={(e) => {
               router.push({
-                pathName: "/",
+                pathName: '/',
                 query: { limit, page: 1, search: e.target.value },
               });
             }}
@@ -32,7 +32,7 @@ const ListHeading = ({ limit, page, totalProduct = 0 }) => {
             value={limit}
             onChange={(e) => {
               router.push({
-                pathName: "/",
+                pathName: '/',
                 query: { limit: e.target.value, page: 1 },
               });
             }}

@@ -1,5 +1,5 @@
-import HomeWrapper from "@/components/HomeWrapper";
-import { getLoadingData } from "@/helper/utilityFunctions";
+import HomeWrapper from '@/components/HomeWrapper';
+import { getLoadingData } from '@/helper/utilityFunctions';
 
 const Loading = () => {
   return (
