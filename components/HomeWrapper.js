@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { metaDataBase } from "@/constants/defaultValues";
-import Card from "./Card";
-import ListHeading from "./ListHeading";
-import Pagination from "./Pagination";
+import { metaDataBase } from '@/constants/defaultValues';
+import Card from './Card';
+import ListHeading from './ListHeading';
+import Pagination from './Pagination';
 
 const HomeWrapper = ({
   data,

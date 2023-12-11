@@ -1,31 +1,32 @@
-import HomeWrapper from "@/components/HomeWrapper";
-import { metaDataBase } from "@/constants/defaultValues";
-import { get } from "@/helper/axiosInstance";
+import HomeWrapper from '@/components/HomeWrapper';
+import { metaDataBase } from '@/constants/defaultValues';
+import { get } from '@/helper/axiosInstance';
 
 async function getData(
   limit = metaDataBase.limit,
   page = metaDataBase.page,
-  search
+  search,
 ) {
   if (search) {
     if (limit && page) {
       const data = await get(
-        `/products/search?q=${search}&limit=${limit}&skip=${(page - 1) * limit}`
+        `/products/search?q=${search}&limit=${limit}&skip=${
+          (page - 1) * limit
+        }`,
       );
       return data;
     }
     const data = await get(`/products/search?q=${search}`);
     return data;
-  } else {
-    if (limit && page) {
-      const data = await get(
-        `/products?limit=${limit}&skip=${(page - 1) * limit}`
-      );
-      return data;
-    }
-    const data = await get(`/products`);
+  }
+  if (limit && page) {
+    const data = await get(
+      `/products?limit=${limit}&skip=${(page - 1) * limit}`,
+    );
     return data;
   }
+  const data = await get('/products');
+  return data;
 }
 
 export default async function Home(props) {
