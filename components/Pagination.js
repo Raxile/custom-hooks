@@ -1,7 +1,6 @@
-import Image from "next/image";
-import React from "react";
-import Arrow from "@/assets/images/arrow.svg";
-import useQueryParam from "@/hooks/useQueryParam";
+import Image from 'next/image';
+import Arrow from '@/assets/images/arrow.svg';
+import useQueryParam from '@/hooks/useQueryParam';
 
 const Pagination = ({ limit, page, totalProduct = 0 }) => {
   const router = useQueryParam();
@@ -18,7 +17,7 @@ const Pagination = ({ limit, page, totalProduct = 0 }) => {
           disabled={page === 1}
           onClick={() =>
             router.push({
-              pathName: "/",
+              pathName: '/',
               query: { limit, page: page - 1 },
             })
           }
@@ -38,7 +37,7 @@ const Pagination = ({ limit, page, totalProduct = 0 }) => {
             disabled={page === pageValue}
             onClick={() => {
               router.push({
-                pathName: "/",
+                pathName: '/',
                 query: { limit, page: pageValue },
               });
             }}
@@ -52,7 +51,7 @@ const Pagination = ({ limit, page, totalProduct = 0 }) => {
           disabled={page === totalPages}
           onClick={() =>
             router.push({
-              pathName: "/",
+              pathName: '/',
               query: { limit, page: Number(page) + 1 },
             })
           }

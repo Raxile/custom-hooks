@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_API,
 });
@@ -9,7 +9,7 @@ axiosInstance.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 axiosInstance.interceptors.response.use(
@@ -17,9 +17,10 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   async (error) => {
+    // eslint-disable-next-line no-console
     console.log(error);
     return Promise.reject(error);
-  }
+  },
 );
 
 export async function get(url, config = {}) {

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 /**
  * Custom hook for handling navigation with query parameters in Next.js.
@@ -17,9 +17,9 @@ function useQueryParam() {
 
   const returnOldQuery = (query) => {
     const oldQuery = window.location.search.substring(1);
-    const keyValuePair = oldQuery.split("&");
+    const keyValuePair = oldQuery.split('&');
     keyValuePair.forEach((pair) => {
-      const [key, value] = pair.split("=");
+      const [key, value] = pair.split('=');
       if (!query[key]) {
         query[key] = value;
       }
@@ -35,11 +35,11 @@ function useQueryParam() {
    */
 
   const typeCheckOfParams = (pathName, query) => {
-    if (typeof pathName !== "string") {
-      throw new Error("pathName is required to be string");
+    if (typeof pathName !== 'string') {
+      throw new Error('pathName is required to be string');
     }
-    if (query && typeof query !== "object") {
-      throw new Error("query is to be object");
+    if (query && typeof query !== 'object') {
+      throw new Error('query is to be object');
     }
     return true;
   };
@@ -52,7 +52,7 @@ function useQueryParam() {
    * @returns {string} The constructed URL.
    */
   const getUrl = (pathName, query, isReplace = true) => {
-    const initialValue = "";
+    const initialValue = '';
     if (!query) {
       return `${pathName}`;
     }
@@ -62,21 +62,17 @@ function useQueryParam() {
     const arrOfKeys = Object.keys(query);
     const queryString = arrOfKeys.reduce((accumulator, currentValue) => {
       if (
-        typeof query[currentValue] === "string" ||
-        typeof query[currentValue] === "number" ||
-        typeof query[currentValue] === "boolean"
+        typeof query[currentValue] === 'string' ||
+        typeof query[currentValue] === 'number' ||
+        typeof query[currentValue] === 'boolean'
       ) {
-        if (accumulator === initialValue) {
-          if (query[currentValue] !== "") {
-            return accumulator + `${currentValue}=${query[currentValue]}`;
-          }
-          return accumulator;
-        } else {
-          if (query[currentValue] !== "")
-            return accumulator + `&${currentValue}=${query[currentValue]}`;
+        if (accumulator === initialValue && query[currentValue] !== '') {
+          return accumulator + `${currentValue}=${query[currentValue]}`;
         }
-        return accumulator;
+        if (query[currentValue] !== '')
+          return accumulator + `&${currentValue}=${query[currentValue]}`;
       }
+
       return accumulator;
     }, initialValue);
     if (queryString) {
